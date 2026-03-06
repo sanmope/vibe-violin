@@ -1,4 +1,4 @@
-# Vibe - Violin Sheet Music Reader
+# Vibe - Violin Smart TEacher
 
 An intelligent web application that transforms PDF sheet music into interactive violin learning experiences with real-time visual feedback for finger positions and bow techniques.
 
