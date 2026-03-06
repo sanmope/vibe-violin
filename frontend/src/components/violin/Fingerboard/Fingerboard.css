@@ -1,0 +1,185 @@
+.fingerboard {
+  background-color: var(--color-surface);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-lg);
+  box-shadow: var(--shadow-md);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Background image will be applied via inline style if provided */
+.fingerboard > * {
+  position: relative;
+  z-index: 1;
+}
+
+.fingerboard__header {
+  margin-bottom: var(--spacing-lg);
+}
+
+.fingerboard__header h3 {
+  margin: 0 0 var(--spacing-sm) 0;
+  color: var(--color-text);
+}
+
+.fingerboard__current-note {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+}
+
+.fingerboard__note-pitch {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--color-primary);
+}
+
+.fingerboard__note-info {
+  font-size: 0.875rem;
+  color: var(--color-text-secondary);
+}
+
+.fingerboard__body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+  padding: var(--spacing-md) 0;
+}
+
+.fingerboard__string-container {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+}
+
+.fingerboard__string-label {
+  font-size: 1.25rem;
+  font-weight: 600;
+  width: 2rem;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.fingerboard__string-line {
+  flex: 1;
+  position: relative;
+  height: 60px;
+  min-height: 60px;
+}
+
+.fingerboard__string-line::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--color-border);
+  transform: translateY(-50%);
+  z-index: 0;
+}
+
+.fingerboard__position {
+  position: absolute;
+  top: 50%;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 2px solid var(--color-border);
+  background-color: var(--color-surface-light);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  transition: all var(--transition-base);
+  cursor: pointer;
+  gap: 2px;
+}
+
+.fingerboard__position--alternative {
+  border-style: dashed;
+  opacity: 0.8;
+}
+
+.fingerboard__position--highlighted {
+  border-width: 3px;
+  background-color: var(--color-surface);
+  transform: scale(1.1);
+  box-shadow: var(--shadow-lg);
+}
+
+.fingerboard__position--current {
+  background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+  border-color: var(--color-primary);
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.15);
+    opacity: 0.9;
+  }
+}
+
+.fingerboard__position-label {
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--color-text-secondary);
+  line-height: 1;
+}
+
+.fingerboard__position-pitch {
+  font-size: 0.6rem;
+  font-weight: 400;
+  color: var(--color-text-secondary);
+  line-height: 1;
+  opacity: 0.7;
+}
+
+.fingerboard__position--current .fingerboard__position-label,
+.fingerboard__position--current .fingerboard__position-pitch {
+  color: white;
+  font-weight: 600;
+  opacity: 1;
+}
+
+.fingerboard__position--disabled {
+  opacity: 0.3;
+  filter: grayscale(0.8);
+  background-color: var(--color-surface);
+  border-color: var(--color-border);
+}
+
+.fingerboard__position--disabled .fingerboard__position-label,
+.fingerboard__position--disabled .fingerboard__position-pitch {
+  color: var(--color-text-secondary);
+  opacity: 0.5;
+}
+
+.fingerboard__position--in-scale {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 4px rgba(var(--color-primary-rgb, 99, 102, 241), 0.4);
+}
+
+.fingerboard__position--in-scale:not(.fingerboard__position--current) {
+  background-color: rgba(var(--color-primary-rgb, 99, 102, 241), 0.1);
+}
+
+.fingerboard__footer {
+  margin-top: var(--spacing-md);
+  padding-top: var(--spacing-md);
+  border-top: 1px solid var(--color-border);
+  text-align: center;
+}
+
+.fingerboard__position-name {
+  font-size: 0.875rem;
+  color: var(--color-text-secondary);
+  text-transform: capitalize;
+}

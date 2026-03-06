@@ -1,0 +1,70 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend
+  namespace: vibe
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: frontend
+  template:
+    metadata:
+      labels:
+        app: frontend
+    spec:
+      containers:
+        - name: frontend
+          image: vibe-frontend:latest
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 443
+            - containerPort: 8080
+          resources:
+            requests:
+              cpu: 50m
+              memory: 64Mi
+            limits:
+              cpu: 200m
+              memory: 128Mi
+          readinessProbe:
+            httpGet:
+              path: /healthz
+              port: 8080
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: 8080
+            initialDelaySeconds: 10
+            periodSeconds: 30
+          volumeMounts:
+            - name: frontend-certs
+              mountPath: /etc/nginx/certs/
+              readOnly: true
+            - name: frontend-nginx-config
+              mountPath: /etc/nginx/conf.d/
+      volumes:
+        - name: frontend-certs
+          secret:
+            secretName: frontend-tls
+        - name: frontend-nginx-config
+          configMap:
+            name: frontend-nginx-config
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: frontend-svc
+  namespace: vibe
+spec:
+  selector:
+    app: frontend
+  ports:
+    - name: https
+      port: 443
+      targetPort: 443
+    - name: health
+      port: 8080
+      targetPort: 8080

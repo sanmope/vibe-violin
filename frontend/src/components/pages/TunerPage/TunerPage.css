@@ -1,0 +1,183 @@
+.tuner-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--color-background);
+}
+
+.tuner-page__header {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-lg);
+  padding: var(--spacing-lg) var(--spacing-xl);
+  background-color: var(--color-surface);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.tuner-page__header h1 {
+  margin: 0;
+  font-size: 1.5rem;
+  flex: 1;
+}
+
+.tuner-page__back-button {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: var(--color-surface-light);
+  color: var(--color-text);
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition-fast);
+}
+
+.tuner-page__back-button:hover {
+  background-color: var(--color-border);
+  transform: scale(1.05);
+}
+
+.tuner-page__violin-badge {
+  padding: var(--spacing-xs) var(--spacing-md);
+  border-radius: var(--radius-full);
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  background-color: rgba(239, 68, 68, 0.15);
+  color: var(--color-error);
+  border: 1px solid var(--color-error);
+  transition: all var(--transition-fast);
+}
+
+.tuner-page__violin-badge--active {
+  background-color: rgba(16, 185, 129, 0.15);
+  color: var(--color-success);
+  border-color: var(--color-success);
+}
+
+.tuner-page__content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-xl);
+  padding: var(--spacing-xl);
+  max-width: 500px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.tuner-page__controls {
+  display: flex;
+  gap: var(--spacing-md);
+  align-items: center;
+}
+
+.tuner-page__toggle {
+  padding: var(--spacing-md) var(--spacing-2xl);
+  font-size: 1.125rem;
+  font-weight: 600;
+  border-radius: var(--radius-full);
+  border: none;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+  color: white;
+}
+
+.tuner-page__toggle:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+.tuner-page__toggle--active {
+  background: linear-gradient(135deg, var(--color-error), #dc2626);
+}
+
+.tuner-page__clear {
+  padding: var(--spacing-sm) var(--spacing-lg);
+  font-size: 0.875rem;
+  font-weight: 500;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border);
+  background-color: var(--color-surface-light);
+  color: var(--color-text);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.tuner-page__clear:hover {
+  background-color: var(--color-border);
+}
+
+.tuner-page__hint {
+  font-size: 0.875rem;
+  color: var(--color-text-secondary);
+  text-align: center;
+}
+
+.tuner-page__error {
+  padding: var(--spacing-sm) var(--spacing-md);
+  background-color: rgba(239, 68, 68, 0.1);
+  color: var(--color-error);
+  border-radius: var(--radius-md);
+  font-size: 0.875rem;
+  text-align: center;
+}
+
+.tuner-page__notes {
+  width: 100%;
+  background-color: var(--color-surface);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-border);
+  padding: var(--spacing-lg);
+}
+
+.tuner-page__notes h3 {
+  margin: 0 0 var(--spacing-md) 0;
+  font-size: 1rem;
+  color: var(--color-text-secondary);
+}
+
+.tuner-page__notes-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.tuner-page__note-item {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  padding: var(--spacing-sm) var(--spacing-md);
+  background-color: var(--color-surface-light);
+  border-radius: var(--radius-sm);
+  font-size: 0.875rem;
+}
+
+.tuner-page__note-pitch {
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--color-primary);
+  min-width: 3rem;
+}
+
+.tuner-page__note-duration {
+  color: var(--color-text);
+  min-width: 4.5rem;
+}
+
+.tuner-page__note-freq {
+  color: var(--color-text-secondary);
+  min-width: 5rem;
+}
+
+.tuner-page__note-time {
+  color: var(--color-text-secondary);
+  margin-left: auto;
+}

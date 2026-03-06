@@ -1,0 +1,24 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: nginx-cert
+  namespace: vibe
+spec:
+  secretName: nginx-tls
+  duration: 2160h # 90 days
+  renewBefore: 720h # 30 days (renew at ~60 days)
+  privateKey:
+    algorithm: ECDSA
+    size: 256
+  usages:
+    - client auth
+    - server auth
+  dnsNames:
+    - nginx-svc
+    - nginx-svc.vibe
+    - nginx-svc.vibe.svc
+    - nginx-svc.vibe.svc.cluster.local
+  issuerRef:
+    name: vibe-ca-issuer
+    kind: Issuer
+    group: cert-manager.io

@@ -1,0 +1,45 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: frontend-nginx-config
+  namespace: vibe
+data:
+  default.conf: |
+    # mTLS server — only accepts connections with valid client certificates
+    server {
+        listen 443 ssl;
+        server_name _;
+
+        # Server certificate (presented to clients)
+        ssl_certificate     /etc/nginx/certs/tls.crt;
+        ssl_certificate_key /etc/nginx/certs/tls.key;
+
+        # Client certificate verification (mTLS)
+        ssl_client_certificate /etc/nginx/certs/ca.crt;
+        ssl_verify_client on;
+
+        # TLS protocol and cipher settings
+        ssl_protocols TLSv1.2 TLSv1.3;
+        ssl_ciphers ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-ECDSA-CHACHA20-POLY1305;
+        ssl_prefer_server_ciphers on;
+
+        root /usr/share/nginx/html;
+        index index.html;
+
+        location / {
+            try_files $uri $uri/ /index.html;
+        }
+    }
+
+    # Health check server — plain HTTP, no client cert required
+    # K8s probes cannot present client certificates
+    server {
+        listen 8080;
+        server_name _;
+
+        location /healthz {
+            access_log off;
+            return 200 '{"status": "ok"}';
+            add_header Content-Type application/json;
+        }
+    }

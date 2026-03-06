@@ -1,0 +1,27 @@
+.time-signature-selector {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+}
+
+.time-signature-selector__label {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--color-text-secondary);
+  white-space: nowrap;
+}
+
+.time-signature-selector__select {
+  padding: var(--spacing-xs) var(--spacing-sm);
+  font-size: 0.875rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--color-border);
+  background-color: var(--color-surface-light);
+  color: var(--color-text);
+  cursor: pointer;
+}
+
+.time-signature-selector__select:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}

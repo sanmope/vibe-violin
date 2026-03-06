@@ -1,0 +1,46 @@
+.metronome-beat {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+}
+
+.metronome-beat--inactive .metronome-beat__dot {
+  background-color: var(--color-surface-light);
+  color: var(--color-text-secondary);
+  opacity: 0.5;
+}
+
+.metronome-beat__dot {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-weight: 600;
+  background-color: var(--color-surface-light);
+  color: var(--color-text-secondary);
+  transition: background-color var(--transition-fast), color var(--transition-fast);
+}
+
+.metronome-beat__dot--downbeat {
+  width: 32px;
+  height: 32px;
+  font-size: 0.8125rem;
+}
+
+.metronome-beat__dot--active {
+  background-color: var(--color-primary);
+  color: white;
+  animation: metronome-pulse 200ms ease-out;
+}
+
+@keyframes metronome-pulse {
+  0% {
+    transform: scale(1.3);
+  }
+  100% {
+    transform: scale(1);
+  }
+}

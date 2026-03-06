@@ -1,0 +1,24 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: frontend-cert
+  namespace: vibe
+spec:
+  secretName: frontend-tls
+  duration: 2160h # 90 days
+  renewBefore: 720h # 30 days (renew at ~60 days)
+  privateKey:
+    algorithm: ECDSA
+    size: 256
+  usages:
+    - server auth
+    - client auth
+  dnsNames:
+    - frontend-svc
+    - frontend-svc.vibe
+    - frontend-svc.vibe.svc
+    - frontend-svc.vibe.svc.cluster.local
+  issuerRef:
+    name: vibe-ca-issuer
+    kind: Issuer
+    group: cert-manager.io
